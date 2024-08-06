@@ -22,6 +22,7 @@ const findOneByEmail = async(email) => {
         values: [email]
     }
     const {rows} = await db.query(query)
+    console.log(rows[0])
     return rows[0]
 }
 
