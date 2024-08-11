@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Register</h1>
+    <form  id="registerForm">
+        <input type="email" placeholder="email" name="email">
+        <input type="username" placeholder="username" name="username">
+        <input type="password" placeholder="password" name="password">
+        <button type="submit">Register</button>
+    </form>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const registerForm = document.querySelector('#registerForm');
+
+        registerForm.addEventListener('submit', async (e)=> {
+            e.preventDefault();
+
+            const email = e.target.email.value;
+            const username = e.target.username.value;
+            const password = e.target.password.value;
+
+            try {
+
+                const { data } = await axios.post('/api/v1/users/register', {
+                    email,
+                    username,
+                    password
+                })
+                
+                window.location.href = '/login';
+                alert('User created successfully');
+                
+            } catch (error) {
+                console.log(alert(error.response.data.msg))
+
+            }
+        })
+    </script>
+</body>
+</html>
